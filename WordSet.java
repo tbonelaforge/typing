@@ -6,7 +6,6 @@ class WordPair  {
         int numspent;
 
         WordPair( int dif, int spent )   {
-
                 d = new Word( dif );
                 numspent = spent;
         }
@@ -27,10 +26,8 @@ class WordSet   {
         int length;
 
         WordSet ( int diff, int sublevel )   {
-
                 data = new WordPair[sublevel];
                 for( int i = 0; i < sublevel; ++i )   {
-
                         data[i] = new WordPair( diff, 0 );
                 }
                 length = sublevel;

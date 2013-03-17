@@ -48,8 +48,6 @@ class TypingPanel extends JPanel implements KeyListener   {
         }
 
         void resetWord()   {
-
-                //Random tempRandy = new Random();
                 int pick;
 
                 pick = (req_pick + 1) % ws.length;
@@ -57,7 +55,6 @@ class TypingPanel extends JPanel implements KeyListener   {
                 req_pick = pick;
                 seedhtml = makeSeedHTML();
                 if( seedimage != null )   {
-
                         seedimage.set( req_word.props );
                         seedimage.seedinfo.setText( seedhtml );
                         //seedinfo is the name of seedimage's Jlabel
@@ -65,12 +62,10 @@ class TypingPanel extends JPanel implements KeyListener   {
         }  //end function resetWord.
 
         void resetTypingPanel()   {
-
                 ws = new WordSet( level, 2 + level );  
                 for( int i = 0; i < ws.length; ++i )   {
-
                         ws.data[i].d.add();  //each has at least one letter
-                }              
+                }
                 resetWord();  //sets the current required word, and the seedHTML
                 glist = new GameList( "_" );  
                 t.setText( "" );
@@ -91,12 +86,8 @@ class TypingPanel extends JPanel implements KeyListener   {
         }  //end function resetTypingPanel
 
         public TypingPanel(PointerPack labels )  {
-
-                
                 setLayout( new GridLayout( 3, 1 ) );
-
                 level = 1;
-                //seedinfo = labels.seedlabel;
                 seedimage = labels.seedimage;
                 levelscorelabel = labels.score1;
                 beatlevellabel = labels.score2;
@@ -104,11 +95,8 @@ class TypingPanel extends JPanel implements KeyListener   {
                 highscorelabel = labels.score4;
 
                 llist = new Lexicon( "lexicon.txt" );
-                //llist = new Lexicon( "http://www.tajspav.com/lexicon.txt" );
                 nlist = new Lexicon( "nouns.txt" );
-                //nlist = new Lexicon( "http://www.tajspav.com/nouns.txt" );
                 vlist = new Lexicon( "verbs.txt" );
-                //vlist = new Lexicon( "http://www.tajspav.com/verbs.txt" );
 
                 JPanel p = new JPanel();                
                 mes = new JLabel( " " );
@@ -138,11 +126,7 @@ class TypingPanel extends JPanel implements KeyListener   {
                 highscoretobeat = 0;
                 resetTypingPanel();
                 totalscore = 0;
-                
-                //getScores();
-
-
-        }  //end constructor
+        }  //end TypingPanel constructor
 
         public void keyPressed( KeyEvent e )   {
         }
@@ -153,8 +137,7 @@ class TypingPanel extends JPanel implements KeyListener   {
                 String newword;
 
                 x = e.getKeyChar();
-                //if( x == '~' ) gameover = true;
-                if( gameover )   {
+                if ( gameover )   {
 
                         int result;
                         boolean possiblequit;
@@ -189,7 +172,6 @@ class TypingPanel extends JPanel implements KeyListener   {
                                 System.exit( 0 );
                         }
                         else resetTypingPanel();
-                        //totalscore = 0;
                 }   //end case gameover
                 if( x == '!' && (req_str.charAt( req_index ) == ' ') && !RTS )   {//begin case score
 
@@ -217,7 +199,7 @@ class TypingPanel extends JPanel implements KeyListener   {
 
                                         ++ws.data[req_pick].numspent;
                                         seedhtml = makeSeedHTML();
-                                        //seedinfo.setText( seedhtml );
+
                                         //seedimage.
                                         //check if used == 4, then possibly remove
                                         if( ws.data[req_pick].numspent >= 5 - level )   {
@@ -228,22 +210,15 @@ class TypingPanel extends JPanel implements KeyListener   {
 
                                                         gameover = true;
                                                 }
-                                                //resetWord();
-                                                //updateRequirement();
                                         }
-                                        //this seed, and put up the removed flag
                                 } //end inner if
                                 else   {
-
                                         mes.setText( "you have already used that word..." );
                                 }                               
-
                         } //end outer if 
                         else   {    //implies not a word
-
                                 mes.setText( newword + " aint no word I ever heard of!" );
                         }
-                        
                         e.consume();
                 }
                 else if( (x == '\n' || x == '!') && RTS && (req_str.charAt( req_index ) == ' ') )   {
@@ -251,32 +226,23 @@ class TypingPanel extends JPanel implements KeyListener   {
                         e.consume();
                         resetWord();
                         removed = false;
+
                         //put the removed flag back down
                         updateRequirement();
-                        //req.setText( new String( req_str ) );
                         RTS = false;
                         t.setText( "" );
                         mes.setText( "" );
                         repaint();
-                }
-
-
-                        
+                }       
                 else if( x == '?' && !RTS )   { //begin case "remove"
 
                         try   {
-
                                 req_word.remove();
                         } catch( FullWordException fwe )   {
-
-                                //System.exit( 0 );
-                                //System.out.println( "Caught the exception" );
                                 ws.data[req_pick] = new WordPair( level, 0 );
                                 ws.data[req_pick].d.add();
                                 req_word = ws.data[req_pick].d;
-//System.out.println( "the required word is: " + req_word );
                                 seedhtml = makeSeedHTML();
-                                //seedinfo.setText( seedhtml );
                                 seedimage.set( req_word.props );
                                 seedimage.seedinfo.setText( seedhtml );
                         }
@@ -287,13 +253,10 @@ class TypingPanel extends JPanel implements KeyListener   {
                         RTS = false;
                         repaint();                        
                 } //end case remove
-
                 else if( x == req_str.charAt( req_index ) )   { //got one right
-  
                       if( x == ' ' )   {  //got the whole word right
                                 //check if remove flag is up
                                 if( removed )   {
-
                                         resetWord();
                                         updateRequirement();
                                         removed = false;
@@ -308,37 +271,26 @@ class TypingPanel extends JPanel implements KeyListener   {
                                 ++times_right;
 
                                 if( times_right >= (4 - level) )   {
-
                                         req_word.add();
                                         updateRequirement();
-                                        //req.setText( new String( req_str ) );
                                         e.consume();
                                 }
-                                                                                                              
-
                                 else   {  //not enough times right,
-
                                         req_index = 0;
                                         e.consume();
                                 }
-
                                
                                 RTS = false;
                                 t.setText( "" );
                                 mes.setText( "" );
                                 repaint();
-
- 
                         }  //end case got the whole word right
                         else   {       //just one character
-
                                 ++req_index;
                         }
                 }        //end case got one right
 
                 else   { //got it wrong: typed a character that didn't match, and wasn't ?, !, or cr
-
-
                         e.consume();                    
                         req_index = 0;
                         RTS = false;
@@ -389,36 +341,10 @@ class TypingPanel extends JPanel implements KeyListener   {
                temp.append( ws.data[req_pick].numspent + " / " );
                temp.append( 5 - level );
                temp.append( "</html>" );
-               /*
-               temp.append( "<table><tr><table cellspacing=0 cellpadding=0 ><tr><td colspan=10 ><img src=&quotpan1_l-1.bmp&quot ></img></td><td colspan=10 ><img src=&quotpan1_r-0.gif&quot ></img></td></tr></table></tr><tr><table cellspacing=0 cellpadding=0 ><tr><td colspan=11 ><img src=&quotpan2_l-1.bmp&quot ></img></td><td colspan=9 ><img src=&quotpan2_r-0.bmp&quot ></img></td></tr></table></tr><tr><table cellspacing=0 cellpadding=0 ><tr><td colspan=12 ><img src=&quotpan3_l-1.bmp&quot ></img></td><td colspan=8 ><img src=&quotpan3_r-0.bmp&quot ></img></td></tr></table></tr></table>" );   //end append statement
-
-               */
-/*
-	       temp.append( "LRow: " );
-               if( (c = ws.data[req_pick].d.props.which_side) == 'l' || c == 'b' )   {
-
-                        appendRowString( temp, 'l' );
-               }
-
-               temp.append( "<br>" );
-               temp.append( "RRow: " );
-               if( c == 'r' || c == 'b' )   {
-
-                        appendRowString( temp, 'r' );                                
-               }
-                temp.append( "<br>" );
-               //temp.append( "Side: " ); temp.append( ws.data[req_pick].d.props.which_side );
-*/
-/*               temp.append( "<br><br><br>" );
-               temp.append( "Level: " + level );
-
-	       temp.append( "<br><br>&copy; T. Ford" );
-*/
                return new String( temp );
         }  //end function makeSeedHTML
 
         String makeLevelScoreHTML()   {
-
                 StringBuffer temp;
 
                 temp = new StringBuffer( "<html><center>Level Score <br>" );
@@ -428,9 +354,7 @@ class TypingPanel extends JPanel implements KeyListener   {
         }
 
         String makeBeatLevelHTML()   {
-
                 StringBuffer temp;
-
                 temp = new StringBuffer( "<html><center>Score to Beat<br>" );
                 temp.append( beatscore[level - 1] );
                 temp.append( "</center></html>" );
@@ -438,7 +362,6 @@ class TypingPanel extends JPanel implements KeyListener   {
         }
 
         String makeTotalScoreHTML()   {
-
                 StringBuffer temp;
 
                 temp = new StringBuffer( "<html><center>Total Score<br>" );
@@ -457,10 +380,7 @@ class TypingPanel extends JPanel implements KeyListener   {
         }
 
         void getScores()   {
-
-
 		for( int i = 0; i < 3; ++i )   {
-
 			beatscore[i] = 0;
 		}
 		highscoretobeat = 0;
@@ -475,131 +395,39 @@ class TypingPanel extends JPanel implements KeyListener   {
 
 
 		try   {
-
                         u = new URL( "http://www.tajspav.com/levelscores.txt" );
                         isr = new InputStreamReader( u.openStream() );
                         br = new BufferedReader( isr );
 
                         levelindex = 0;
                         while( (line = br.readLine() ) != null )   {
-
                                 value = Integer.parseInt( line );
                                 if( levelindex < 3 )   {
-
                                         beatscore[levelindex] = value;
                                 }
                                 else   { //last line.
-
                                         highscoretobeat = value;
                                 }
                                 ++levelindex;
                         }  //end while loop => end of file read
                 }  //end try block.
                 catch( Exception e )   {
-
                         //System.out.println( "Something Really wierd happened" );
                 }
-
-                
-
-/*
-                File infile;
-                FileReader fr;
-                BufferedReader br;
-                String line;
-                int levelindex;
-                int value;
-
-                try    {
-
-                        infile = new File( "levelscores.txt" );
-                        if( !infile.exists() || !infile.canRead() )   {
-
-                                infile.createNewFile();
-                        }
-                        fr = new FileReader( infile );
-                        br = new BufferedReader( fr );
-
-                        levelindex = 0;
-                        while( (line = br.readLine() ) != null )   {
-
-                                value = Integer.parseInt( line );
-                                if( levelindex < 3 )   {
-
-                                        beatscore[levelindex] = value;
-                                }
-                                else   { //last line.
-
-                                        highscoretobeat = value;
-                                }
-                                ++levelindex;
-                        }  //end while loop => end of file read
-                }  //end try block.
-                catch( IOException ios )   {
-
-                        System.out.println( "Something Really wierd happened" );
-                }
-*/
         }  //end function getScores
 
         void writeOutScores ()   {
-
-
-/*
-                File outfile;
-                FileWriter fw;
-                PrintWriter pw;
-
-                try   {
-
-                        outfile = new File( "levelscores.txt" );
-                        fw = new FileWriter( outfile );
-                        pw = new PrintWriter( fw );
-                        for( int i = 0; i < 3; ++i )   {
-
-                                int newscore;
-
-                                newscore = beatscore[i];
-                                if( level == i + 1 )   {//need to change the score
-
-                                        int max, min;
-                                        if( levelscore <= beatscore[i] )   {
-
-                                                max = beatscore[i];
-                                                min = levelscore;
-                                        }
-                                        else   {
-
-                                                max = levelscore;
-                                                min = beatscore[i];
-                                        }
-                                        newscore = (2*max + min) / 3;
-                                } //end case right level                               
-                                pw.println( newscore );
-                        }//end for loop
-                        pw.println( highscoretobeat );
-                        fw.close();
-                }  //end try
-                catch( IOException ioe )   {
-
-                        System.out.println( "something really wierd happened" );
-                }
-*/
 
         }  //end function writeOutScores
 
 
         int score( String s )   {
-
                 return req_word.props.maxlen * s.length();
         }
                 
         boolean levelAdvanceable()   {
-
                 int result;
-
                 if( level >= 3 )   {
-
                         result = JOptionPane.showConfirmDialog( null, "Wanna play again?" );
                         if( result != JOptionPane.YES_OPTION ) System.exit( 0 );
                         return true;
@@ -613,9 +441,7 @@ class TypingPanel extends JPanel implements KeyListener   {
         }
 
         boolean wantToQuit()   {
-
                 int result;
-
                 result = JOptionPane.showConfirmDialog( null, "Wanna repeat the same level?" );
                 if( result != JOptionPane.YES_OPTION )   return true;
                 else return false;

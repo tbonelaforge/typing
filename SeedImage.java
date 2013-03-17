@@ -80,27 +80,9 @@ public class SeedImage extends JPanel   {
                 add( p, BorderLayout.SOUTH );                                        
 
         }  //end constructor
-/*
-        public static void main( String [] args )   {
 
-                SeedImage seedimage;
-                PropSet p;
-                JFrame frame = new JFrame( "Border1" );
-                frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
-                frame.setSize( 300, 300 );
-                frame.setLocation( 200, 200 );
-                seedimage = new SeedImage();
-                frame.setContentPane( seedimage );
-                frame.setVisible( true );
-                p = new PropSet( 1 );
-                p.print();
-                seedimage.set( p );
-
-        }  //end main function
-*/
 
         public void set( PropSet p )   {
-System.out.println( "tried to set the image" );
         int row;
         char c;
         c = p.which_side;
@@ -111,11 +93,9 @@ System.out.println( "tried to set the image" );
                 l = lpan[row];
                 r = rpan[row];
                 if (c == 'l' )   {
-System.out.println( "made it to the case where the side is left" );                          
                         r.setIcon( rpan_off[row] );
                         if( (p.lm+1 <= row+1) && (row+1 <= p.lm+p.d) )   {
                                 //left panel within range
-System.out.println( "tried to set the " + row + "th right panel" );
                                 l.setIcon( lpan_on[row] );
                         }
                         else   {
@@ -125,11 +105,9 @@ System.out.println( "tried to set the " + row + "th right panel" );
 
                 }   //end case left side
                 else if (c == 'r' )   {
-System.out.println( "made it the case where side is right" );
                         l.setIcon( lpan_off[row] );
                         if( (p.rm+1 <= row+1) && (row+1 <= p.rm+p.d) )   {
                                   //right panel within range
-System.out.println( "tried to set the " + row + "th right panel" );
                                 r.setIcon( rpan_on[row] );
                         }
                         else   {
@@ -139,10 +117,8 @@ System.out.println( "tried to set the " + row + "th right panel" );
 
                 }    //end case right side
                 else   {  //side is both
- System.out.println( "made it to the case where side is b" );
                         if( (p.rm+1 <= row+1) && (row+1 <= p.rm+p.d) )   {
                                   //right panel within range
-System.out.println( "tried to set the " + row + "th right panel" );
                                 r.setIcon( rpan_on[row] );
                         }
                         else   {
@@ -151,7 +127,6 @@ System.out.println( "tried to set the " + row + "th right panel" );
                         }
                         if( (p.lm+1 <= row+1) && (row+1 <= p.lm+p.d) )   {
                                 //left panel within range
-System.out.println( "tried to set the " + row + "th left panel" );
                                 l.setIcon( lpan_on[row] );
                         }
                         else   {
@@ -162,9 +137,6 @@ System.out.println( "tried to set the " + row + "th left panel" );
         }//end for loop
 
         }//end set function
-
-                
-                
 
 }  //end SeedImage class definition
         

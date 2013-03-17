@@ -10,7 +10,6 @@ class Word   {
 
                 props = new PropSet( diff );
                 data = new WordNode( '_' );
-                print();
         }
 
         void print()   {

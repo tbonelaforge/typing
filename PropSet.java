@@ -22,18 +22,6 @@ class PropSet   {
 
 
 /****************************************************************************
-PropSet():     Default constructor, should set up a prop set with
-               side = both, and difficulty = 3.
-****************************************************************************/
-/*
-        PropSet()   {
-
-                d = 3;
-                lm = rm = 0;
-                which_side = 'b';
-        }
-*/
-/****************************************************************************
 PropSet( int init_diff ):    initial value constructor, should create a randomized
                      lm and rm value based on the assigned difficulty,
                      as well as randomly picking a side.
@@ -181,11 +169,6 @@ genChar: Produces a random character that is not a ';', ',', '.', or '/'
                         }
                 }  //end else
         } //end function genChar
-                               
-
-                
-
-
 
 }  //end PropSet Class Definition
 

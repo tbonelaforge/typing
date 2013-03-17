@@ -47,7 +47,7 @@ HOW TO PLAY THE GAME:
    Also, if only one letter is being displayed, typing '?' will remove that letter, and replace it with a new one. 
 
 5. When you get a letter sequence that you think is a word, type the full word, and then type '!'.
-   This will signal the program to score it for you, and it will check the word against its lexicon.
+   This will signal the program to score it for you, and it will check the word against the lexicon.
 
 6. When you succesfully score points on a word, you can either keep 
    working with the same sequence by pressing space bar, 

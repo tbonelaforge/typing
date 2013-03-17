@@ -1,0 +1,19 @@
+This is little java application to help practice the skill of touch-typing.
+
+To compile and run the program, try the following steps.
+
+1. Download the source code:
+
+cd ~
+git clone https://github.com/tbonelaforge/typing.git
+
+2. Compile the source code. The main entry point is Typing.java.
+
+cd ~/typing
+javac Typing.java
+
+3. Run the program.
+
+java Typing
+
+
